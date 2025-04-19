@@ -1,283 +1,254 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2639
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 AppleColorEmoji;\f2\fnil\fcharset0 LucidaGrande;
-}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Study Smarter: Superpowers for Your Brain</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Comic Neue', cursive;
+      margin: 0;
+      background-color: #f7f9fc;
+      color: #333;
+    }
+    header {
+      background-color: #d1f2eb;
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border-radius: 0 0 30px 30px;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 1.4rem;
+      color: #555;
+    }
+    .section {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    .section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.8rem;
+    }
+    .tile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .tile {
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 18px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-left: 10px solid #ccc;
+    }
+    .tile:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+    }
+    .tile h3 {
+      margin-top: 0;
+      color: #2c3e50;
+      font-size: 1.5rem;
+    }
+    .tile p {
+      margin: 0.6rem 0;
+      font-size: 1.1rem;
+    }
+    .tile a {
+      text-decoration: none;
+      color: #00897b;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      font-size: 1rem;
+      padding: 2rem 1rem;
+      color: #888;
+    }
+    .memory .tile { border-left-color: #aed581; }
+    .focus .tile { border-left-color: #ffca28; }
+    .planning .tile { border-left-color: #4fc3f7; }
+    .problem .tile { border-left-color: #ba68c8; }
+    .creative .tile { border-left-color: #ff8a65; }
+  </style>
+</head>
+<body>
 
-\f0\fs24 \cf0 <!DOCTYPE html>\
-<html lang="en">\
-<head>\
-  <meta charset="UTF-8" />\
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>\
-  <title>Study Smarter: Superpowers for Your Brain</title>\
-  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">\
-  <style>\
-    body \{\
-      font-family: 'Comic Neue', cursive;\
-      margin: 0;\
-      background-color: #f7f9fc;\
-      color: #333;\
-    \}\
-    header \{\
-      background-color: #d1f2eb;\
-      text-align: center;\
-      padding: 2.5rem 1.5rem;\
-      border-radius: 0 0 30px 30px;\
-    \}\
-    header h1 \{\
-      font-size: 3rem;\
-      margin-bottom: 0.5rem;\
-    \}\
-    header p \{\
-      font-size: 1.4rem;\
-      color: #555;\
-    \}\
-    .section \{\
-      max-width: 1100px;\
-      margin: 3rem auto;\
-      padding: 0 1rem;\
-    \}\
-    .section h2 \{\
-      font-size: 2.2rem;\
-      margin-bottom: 1.8rem;\
-    \}\
-    .tile-grid \{\
-      display: grid;\
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));\
-      gap: 2rem;\
-    \}\
-    .tile \{\
-      background-color: #ffffff;\
-      padding: 2rem;\
-      border-radius: 18px;\
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);\
-      transition: transform 0.2s ease, box-shadow 0.2s ease;\
-      border-left: 10px solid #ccc;\
-    \}\
-    .tile:hover \{\
-      transform: translateY(-8px);\
-      box-shadow: 0 10px 24px rgba(0,0,0,0.12);\
-    \}\
-    .tile h3 \{\
-      margin-top: 0;\
-      color: #2c3e50;\
-      font-size: 1.5rem;\
-    \}\
-    .tile p \{\
-      margin: 0.6rem 0;\
-      font-size: 1.1rem;\
-    \}\
-    .tile a \{\
-      text-decoration: none;\
-      color: #00897b;\
-      font-weight: bold;\
-    \}\
-    footer \{\
-      text-align: center;\
-      font-size: 1rem;\
-      padding: 2rem 1rem;\
-      color: #888;\
-    \}\
-    .memory .tile \{ border-left-color: #aed581; \}\
-    .focus .tile \{ border-left-color: #ffca28; \}\
-    .planning .tile \{ border-left-color: #4fc3f7; \}\
-    .problem .tile \{ border-left-color: #ba68c8; \}\
-    .creative .tile \{ border-left-color: #ff8a65; \}\
-  </style>\
-</head>\
-<body>\
-\
-  <header>\
-    <h1>Study Smarter: Superpowers for Your Brain</h1>\
-    <p>Level up your learning with fun techniques, examples, and helpful AI tools 
-\f1 \uc0\u55356 \u57235 
-\f0 </p>\
-  </header>\
-\
-  <!-- Memory -->\
-  <section class="section memory">\
-    <h2>
-\f1 \uc0\u55358 \u56800 
-\f0  Memory Boosters</h2>\
-    <div class="tile-grid">\
-      <div class="tile">\
-        <h3>Mnemonic Devices</h3>\
-        <p>Use acronyms or phrases to recall info.</p>\
-        <p><strong>Example:</strong> \'93HOMES\'94 for Great Lakes: Huron, Ontario, Michigan, Erie, Superior.</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Visualization</h3>\
-        <p>Create vivid mental images to remember details.</p>\
-        <p><strong>Example:</strong> Picture a giant brain holding flashcards for vocabulary words.</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Chunking</h3>\
-        <p>Break large info into smaller groups or chunks.</p>\
-        <p><strong>Example:</strong> Instead of 149217761812, remember 1492\'961776\'961812.</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Spaced Repetition</h3>\
-        <p>Review information over increasing intervals of time.</p>\
-        <p><strong>Example:</strong> Use <a href="https://apps.ankiweb.net/">Anki</a> to practice vocab regularly.</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Memory Palace</h3>\
-        <p>Place facts in a mental map of your house or room.</p>\
-        <p><strong>Example:</strong> Imagine a math formula sitting on your kitchen table.</p>\
-      </div>\
-    </div>\
-  </section>\
-\
-  <!-- Focus -->\
-  <section class="section focus">\
-    <h2>
-\f1 \uc0\u55356 \u57263 
-\f0  Focus & Procrastination Fighters</h2>\
-    <div class="tile-grid">\
-      <div class="tile">\
-        <h3>Study Playlist</h3>\
-        <p>Use instrumental or lo-fi music to stay in the zone.</p>\
-        <p><strong>Example:</strong> Try <a href="https://lofi.cafe">Lofi Cafe</a>.</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Pomodoro Technique</h3>\
-        <p>Study for 25 minutes, then take a 5-minute break.</p>\
-        <p><strong>Example:</strong> Use a timer or <a href="https://pomofocus.io">Pomofocus</a> for structure.</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Distraction Blockers</h3>\
-        <p>Turn off notifications or block distracting apps.</p>\
-        <p><strong>Example:</strong> Use <a href="https://freedom.to">Freedom</a> to stay focused.</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Mindful Breathing</h3>\
-        <p>Calm your mind before studying with deep breaths.</p>\
-        <p><strong>Example:</strong> Inhale for 4, hold for 4, exhale for 4, hold for 4.</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Clean Workspace</h3>\
-        <p>Remove clutter to help your brain stay organized.</p>\
-        <p><strong>Example:</strong> Keep only what you need: notebook, water, and laptop.</p>\
-      </div>\
-    </div>\
-  </section>\
-\
-  <!-- Planning -->\
-  <section class="section planning">\
-    <h2>
-\f1 \uc0\u55357 \u56770 \u65039 
-\f0  Smart Planning & AI Helpers</h2>\
-    <div class="tile-grid">\
-      <div class="tile">\
-        <h3>Daily Goal Setting</h3>\
-        <p>Write down 3 goals every morning.</p>\
-        <p><strong>Example:</strong> \'93Finish math worksheet, revise bio notes, plan project.\'94</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Time Blocking</h3>\
-        <p>Assign specific time slots for each subject or task.</p>\
-        <p><strong>Example:</strong> 4\'965pm: Science. 5\'965:30pm: Snack. 5:30\'966:30pm: English.</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Use AI for Research</h3>\
-        <p>Ask AI to help you outline topics or summarize info.</p>\
-        <p><strong>Example:</strong> "Explain how volcanoes form in simple terms."</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Checklists & Reminders</h3>\
-        <p>Keep a to-do list or planner to stay on track.</p>\
-        <p><strong>Example:</strong> Use Google Tasks or a paper journal.</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Calendar Planning</h3>\
-        <p>Use calendars to map out tests, projects, and breaks.</p>\
-        <p><strong>Example:</strong> Color code subjects in Google Calendar.</p>\
-      </div>\
-    </div>\
-  </section>\
-\
-  <!-- Problem Solving -->\
-  <section class="section problem">\
-    <h2>
-\f1 \uc0\u55357 \u56589 
-\f0  Problem Solving & Thinking Skills</h2>\
-    <div class="tile-grid">\
-      <div class="tile">\
-        <h3>Diagram It</h3>\
-        <p>Draw the problem to visualize it clearly.</p>\
-        <p><strong>Example:</strong> Sketch a triangle to solve a geometry question.</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Ask Why</h3>\
-        <p>Use the 5 Whys technique to dig into root causes.</p>\
-        <p><strong>Example:</strong> \'93Why didn\'92t I finish my project?\'94 Keep asking why!</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Break It Down</h3>\
-        <p>Split big problems into smaller steps.</p>\
-        <p><strong>Example:</strong> Writing an essay 
-\f2 \uc0\u8594 
-\f0  pick topic 
-\f2 \uc0\u8594 
-\f0  make outline 
-\f2 \uc0\u8594 
-\f0  write intro.</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Use AI Tutors</h3>\
-        <p>Get instant help understanding tricky concepts.</p>\
-        <p><strong>Example:</strong> "Can you help me solve this algebra equation?"</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Compare Examples</h3>\
-        <p>Study solved problems to learn patterns.</p>\
-        <p><strong>Example:</strong> Look at two sample essays to see what works.</p>\
-      </div>\
-    </div>\
-  </section>\
-\
-  <!-- Creativity -->\
-  <section class="section creative">\
-    <h2>
-\f1 \uc0\u55356 \u57256 
-\f0  Creative Thinking Tools</h2>\
-    <div class="tile-grid">\
-      <div class="tile">\
-        <h3>Storytelling</h3>\
-        <p>Turn topics into short stories to make them memorable.</p>\
-        <p><strong>Example:</strong> Imagine cells as a city with mitochondria as the power plant!</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Mind Maps</h3>\
-        <p>Create colorful diagrams with keywords branching out.</p>\
-        <p><strong>Example:</strong> Start with "Photosynthesis" and branch out terms like CO2, sunlight, oxygen.</p>\
-      </div>\
-      <div class="tile">\
-        <h3>What-If Game</h3>\
-        <p>Ask wild questions to explore ideas.</p>\
-        <p><strong>Example:</strong> What if gravity suddenly disappeared?</p>\
-      </div>\
-      <div class="tile">\
-        <h3>Role Play</h3>\
-        <p>Pretend to be the scientist or historical figure you're studying.</p>\
-        <p><strong>Example:</strong> Act like Marie Curie explaining her discovery!</p>\
-      </div>\
-      <div class="tile">\
-        <h3>AI as Brainstorm Buddy</h3>\
-        <p>Use AI to generate ideas or get feedback.</p>\
-        <p><strong>Example:</strong> \'93Give me 3 ideas for my science project.\'94</p>\
-      </div>\
-    </div>\
-  </section>\
-\
-  <footer>\
-    \'a9 2025 Study Smarter | Built with love for curious students 
-\f1 \uc0\u55357 \u56481 
-\f0 \
-  </footer>\
-\
-</body>\
-</html>\
-}
+  <header>
+    <h1>Study Smarter: Superpowers for Your Brain</h1>
+    <p>Level up your learning with fun techniques, examples, and helpful AI tools 🎓</p>
+  </header>
+
+  <!-- Memory -->
+  <section class="section memory">
+    <h2>🧠 Memory Boosters</h2>
+    <div class="tile-grid">
+      <div class="tile">
+        <h3>Mnemonic Devices</h3>
+        <p>Use acronyms or phrases to recall info.</p>
+        <p><strong>Example:</strong> “HOMES” for Great Lakes: Huron, Ontario, Michigan, Erie, Superior.</p>
+      </div>
+      <div class="tile">
+        <h3>Visualization</h3>
+        <p>Create vivid mental images to remember details.</p>
+        <p><strong>Example:</strong> Picture a giant brain holding flashcards for vocabulary words.</p>
+      </div>
+      <div class="tile">
+        <h3>Chunking</h3>
+        <p>Break large info into smaller groups or chunks.</p>
+        <p><strong>Example:</strong> Instead of 149217761812, remember 1492–1776–1812.</p>
+      </div>
+      <div class="tile">
+        <h3>Spaced Repetition</h3>
+        <p>Review information over increasing intervals of time.</p>
+        <p><strong>Example:</strong> Use <a href="https://apps.ankiweb.net/">Anki</a> to practice vocab regularly.</p>
+      </div>
+      <div class="tile">
+        <h3>Memory Palace</h3>
+        <p>Place facts in a mental map of your house or room.</p>
+        <p><strong>Example:</strong> Imagine a math formula sitting on your kitchen table.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Focus -->
+  <section class="section focus">
+    <h2>🎯 Focus & Procrastination Fighters</h2>
+    <div class="tile-grid">
+      <div class="tile">
+        <h3>Study Playlist</h3>
+        <p>Use instrumental or lo-fi music to stay in the zone.</p>
+        <p><strong>Example:</strong> Try <a href="https://lofi.cafe">Lofi Cafe</a>.</p>
+      </div>
+      <div class="tile">
+        <h3>Pomodoro Technique</h3>
+        <p>Study for 25 minutes, then take a 5-minute break.</p>
+        <p><strong>Example:</strong> Use a timer or <a href="https://pomofocus.io">Pomofocus</a> for structure.</p>
+      </div>
+      <div class="tile">
+        <h3>Distraction Blockers</h3>
+        <p>Turn off notifications or block distracting apps.</p>
+        <p><strong>Example:</strong> Use <a href="https://freedom.to">Freedom</a> to stay focused.</p>
+      </div>
+      <div class="tile">
+        <h3>Mindful Breathing</h3>
+        <p>Calm your mind before studying with deep breaths.</p>
+        <p><strong>Example:</strong> Inhale for 4, hold for 4, exhale for 4, hold for 4.</p>
+      </div>
+      <div class="tile">
+        <h3>Clean Workspace</h3>
+        <p>Remove clutter to help your brain stay organized.</p>
+        <p><strong>Example:</strong> Keep only what you need: notebook, water, and laptop.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planning -->
+  <section class="section planning">
+    <h2>🗂️ Smart Planning & AI Helpers</h2>
+    <div class="tile-grid">
+      <div class="tile">
+        <h3>Daily Goal Setting</h3>
+        <p>Write down 3 goals every morning.</p>
+        <p><strong>Example:</strong> “Finish math worksheet, revise bio notes, plan project.”</p>
+      </div>
+      <div class="tile">
+        <h3>Time Blocking</h3>
+        <p>Assign specific time slots for each subject or task.</p>
+        <p><strong>Example:</strong> 4–5pm: Science. 5–5:30pm: Snack. 5:30–6:30pm: English.</p>
+      </div>
+      <div class="tile">
+        <h3>Use AI for Research</h3>
+        <p>Ask AI to help you outline topics or summarize info.</p>
+        <p><strong>Example:</strong> "Explain how volcanoes form in simple terms."</p>
+      </div>
+      <div class="tile">
+        <h3>Checklists & Reminders</h3>
+        <p>Keep a to-do list or planner to stay on track.</p>
+        <p><strong>Example:</strong> Use Google Tasks or a paper journal.</p>
+      </div>
+      <div class="tile">
+        <h3>Calendar Planning</h3>
+        <p>Use calendars to map out tests, projects, and breaks.</p>
+        <p><strong>Example:</strong> Color code subjects in Google Calendar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Solving -->
+  <section class="section problem">
+    <h2>🔍 Problem Solving & Thinking Skills</h2>
+    <div class="tile-grid">
+      <div class="tile">
+        <h3>Diagram It</h3>
+        <p>Draw the problem to visualize it clearly.</p>
+        <p><strong>Example:</strong> Sketch a triangle to solve a geometry question.</p>
+      </div>
+      <div class="tile">
+        <h3>Ask Why</h3>
+        <p>Use the 5 Whys technique to dig into root causes.</p>
+        <p><strong>Example:</strong> “Why didn’t I finish my project?” Keep asking why!</p>
+      </div>
+      <div class="tile">
+        <h3>Break It Down</h3>
+        <p>Split big problems into smaller steps.</p>
+        <p><strong>Example:</strong> Writing an essay → pick topic → make outline → write intro.</p>
+      </div>
+      <div class="tile">
+        <h3>Use AI Tutors</h3>
+        <p>Get instant help understanding tricky concepts.</p>
+        <p><strong>Example:</strong> "Can you help me solve this algebra equation?"</p>
+      </div>
+      <div class="tile">
+        <h3>Compare Examples</h3>
+        <p>Study solved problems to learn patterns.</p>
+        <p><strong>Example:</strong> Look at two sample essays to see what works.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Creativity -->
+  <section class="section creative">
+    <h2>🎨 Creative Thinking Tools</h2>
+    <div class="tile-grid">
+      <div class="tile">
+        <h3>Storytelling</h3>
+        <p>Turn topics into short stories to make them memorable.</p>
+        <p><strong>Example:</strong> Imagine cells as a city with mitochondria as the power plant!</p>
+      </div>
+      <div class="tile">
+        <h3>Mind Maps</h3>
+        <p>Create colorful diagrams with keywords branching out.</p>
+        <p><strong>Example:</strong> Start with "Photosynthesis" and branch out terms like CO2, sunlight, oxygen.</p>
+      </div>
+      <div class="tile">
+        <h3>What-If Game</h3>
+        <p>Ask wild questions to explore ideas.</p>
+        <p><strong>Example:</strong> What if gravity suddenly disappeared?</p>
+      </div>
+      <div class="tile">
+        <h3>Role Play</h3>
+        <p>Pretend to be the scientist or historical figure you're studying.</p>
+        <p><strong>Example:</strong> Act like Marie Curie explaining her discovery!</p>
+      </div>
+      <div class="tile">
+        <h3>AI as Brainstorm Buddy</h3>
+        <p>Use AI to generate ideas or get feedback.</p>
+        <p><strong>Example:</strong> “Give me 3 ideas for my science project.”</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Study Smarter | Built with love for curious students 💡
+  </footer>
+
+</body>
+</html>
