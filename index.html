@@ -6,249 +6,86 @@
   <title>Study Smarter: Superpowers for Your Brain</title>
   <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Comic Neue', cursive;
-      margin: 0;
-      background-color: #f7f9fc;
-      color: #333;
-    }
-    header {
-      background-color: #d1f2eb;
-      text-align: center;
-      padding: 2.5rem 1.5rem;
-      border-radius: 0 0 30px 30px;
-    }
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-    }
-    header p {
-      font-size: 1.4rem;
-      color: #555;
-    }
-    .section {
-      max-width: 1100px;
-      margin: 3rem auto;
-      padding: 0 1rem;
-    }
-    .section h2 {
-      font-size: 2.2rem;
-      margin-bottom: 1.8rem;
-    }
-    .tile-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-    .tile {
-      background-color: #ffffff;
-      padding: 2rem;
-      border-radius: 18px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      border-left: 10px solid #ccc;
-    }
-    .tile:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-    }
-    .tile h3 {
-      margin-top: 0;
-      color: #2c3e50;
-      font-size: 1.5rem;
-    }
-    .tile p {
-      margin: 0.6rem 0;
-      font-size: 1.1rem;
-    }
-    .tile a {
-      text-decoration: none;
-      color: #00897b;
-      font-weight: bold;
-    }
-    footer {
-      text-align: center;
-      font-size: 1rem;
-      padding: 2rem 1rem;
-      color: #888;
-    }
-    .memory .tile { border-left-color: #aed581; }
-    .focus .tile { border-left-color: #ffca28; }
-    .planning .tile { border-left-color: #4fc3f7; }
-    .problem .tile { border-left-color: #ba68c8; }
-    .creative .tile { border-left-color: #ff8a65; }
+    /* ... (Your existing CSS) ... */
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-
   <header>
     <h1>Study Smarter: Superpowers for Your Brain</h1>
     <p>Level up your learning with fun techniques, examples, and helpful AI tools 🎓</p>
   </header>
 
-  <!-- Memory -->
-  <section class="section memory">
-    <h2>🧠 Memory Boosters</h2>
-    <div class="tile-grid">
-      <div class="tile">
-        <h3>Mnemonic Devices</h3>
-        <p>Use acronyms or phrases to recall info.</p>
-        <p><strong>Example:</strong> “HOMES” for Great Lakes: Huron, Ontario, Michigan, Erie, Superior.</p>
-      </div>
-      <div class="tile">
-        <h3>Visualization</h3>
-        <p>Create vivid mental images to remember details.</p>
-        <p><strong>Example:</strong> Picture a giant brain holding flashcards for vocabulary words.</p>
-      </div>
-      <div class="tile">
-        <h3>Chunking</h3>
-        <p>Break large info into smaller groups or chunks.</p>
-        <p><strong>Example:</strong> Instead of 149217761812, remember 1492–1776–1812.</p>
-      </div>
-      <div class="tile">
-        <h3>Spaced Repetition</h3>
-        <p>Review information over increasing intervals of time.</p>
-        <p><strong>Example:</strong> Use <a href="https://apps.ankiweb.net/">Anki</a> to practice vocab regularly.</p>
-      </div>
-      <div class="tile">
-        <h3>Memory Palace</h3>
-        <p>Place facts in a mental map of your house or room.</p>
-        <p><strong>Example:</strong> Imagine a math formula sitting on your kitchen table.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Focus -->
-  <section class="section focus">
-    <h2>🎯 Focus & Procrastination Fighters</h2>
-    <div class="tile-grid">
-      <div class="tile">
-        <h3>Study Playlist</h3>
-        <p>Use instrumental or lo-fi music to stay in the zone.</p>
-        <p><strong>Example:</strong> Try <a href="https://lofi.cafe">Lofi Cafe</a>.</p>
-      </div>
-      <div class="tile">
-        <h3>Pomodoro Technique</h3>
-        <p>Study for 25 minutes, then take a 5-minute break.</p>
-        <p><strong>Example:</strong> Use a timer or <a href="https://pomofocus.io">Pomofocus</a> for structure.</p>
-      </div>
-      <div class="tile">
-        <h3>Distraction Blockers</h3>
-        <p>Turn off notifications or block distracting apps.</p>
-        <p><strong>Example:</strong> Use <a href="https://freedom.to">Freedom</a> to stay focused.</p>
-      </div>
-      <div class="tile">
-        <h3>Mindful Breathing</h3>
-        <p>Calm your mind before studying with deep breaths.</p>
-        <p><strong>Example:</strong> Inhale for 4, hold for 4, exhale for 4, hold for 4.</p>
-      </div>
-      <div class="tile">
-        <h3>Clean Workspace</h3>
-        <p>Remove clutter to help your brain stay organized.</p>
-        <p><strong>Example:</strong> Keep only what you need: notebook, water, and laptop.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Planning -->
-  <section class="section planning">
-    <h2>🗂️ Smart Planning & AI Helpers</h2>
-    <div class="tile-grid">
-      <div class="tile">
-        <h3>Daily Goal Setting</h3>
-        <p>Write down 3 goals every morning.</p>
-        <p><strong>Example:</strong> “Finish math worksheet, revise bio notes, plan project.”</p>
-      </div>
-      <div class="tile">
-        <h3>Time Blocking</h3>
-        <p>Assign specific time slots for each subject or task.</p>
-        <p><strong>Example:</strong> 4–5pm: Science. 5–5:30pm: Snack. 5:30–6:30pm: English.</p>
-      </div>
-      <div class="tile">
-        <h3>Use AI for Research</h3>
-        <p>Ask AI to help you outline topics or summarize info.</p>
-        <p><strong>Example:</strong> "Explain how volcanoes form in simple terms."</p>
-      </div>
-      <div class="tile">
-        <h3>Checklists & Reminders</h3>
-        <p>Keep a to-do list or planner to stay on track.</p>
-        <p><strong>Example:</strong> Use Google Tasks or a paper journal.</p>
-      </div>
-      <div class="tile">
-        <h3>Calendar Planning</h3>
-        <p>Use calendars to map out tests, projects, and breaks.</p>
-        <p><strong>Example:</strong> Color code subjects in Google Calendar.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Problem Solving -->
-  <section class="section problem">
-    <h2>🔍 Problem Solving & Thinking Skills</h2>
-    <div class="tile-grid">
-      <div class="tile">
-        <h3>Diagram It</h3>
-        <p>Draw the problem to visualize it clearly.</p>
-        <p><strong>Example:</strong> Sketch a triangle to solve a geometry question.</p>
-      </div>
-      <div class="tile">
-        <h3>Ask Why</h3>
-        <p>Use the 5 Whys technique to dig into root causes.</p>
-        <p><strong>Example:</strong> “Why didn’t I finish my project?” Keep asking why!</p>
-      </div>
-      <div class="tile">
-        <h3>Break It Down</h3>
-        <p>Split big problems into smaller steps.</p>
-        <p><strong>Example:</strong> Writing an essay → pick topic → make outline → write intro.</p>
-      </div>
-      <div class="tile">
-        <h3>Use AI Tutors</h3>
-        <p>Get instant help understanding tricky concepts.</p>
-        <p><strong>Example:</strong> "Can you help me solve this algebra equation?"</p>
-      </div>
-      <div class="tile">
-        <h3>Compare Examples</h3>
-        <p>Study solved problems to learn patterns.</p>
-        <p><strong>Example:</strong> Look at two sample essays to see what works.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Creativity -->
-  <section class="section creative">
-    <h2>🎨 Creative Thinking Tools</h2>
-    <div class="tile-grid">
-      <div class="tile">
-        <h3>Storytelling</h3>
-        <p>Turn topics into short stories to make them memorable.</p>
-        <p><strong>Example:</strong> Imagine cells as a city with mitochondria as the power plant!</p>
-      </div>
-      <div class="tile">
-        <h3>Mind Maps</h3>
-        <p>Create colorful diagrams with keywords branching out.</p>
-        <p><strong>Example:</strong> Start with "Photosynthesis" and branch out terms like CO2, sunlight, oxygen.</p>
-      </div>
-      <div class="tile">
-        <h3>What-If Game</h3>
-        <p>Ask wild questions to explore ideas.</p>
-        <p><strong>Example:</strong> What if gravity suddenly disappeared?</p>
-      </div>
-      <div class="tile">
-        <h3>Role Play</h3>
-        <p>Pretend to be the scientist or historical figure you're studying.</p>
-        <p><strong>Example:</strong> Act like Marie Curie explaining her discovery!</p>
-      </div>
-      <div class="tile">
-        <h3>AI as Brainstorm Buddy</h3>
-        <p>Use AI to generate ideas or get feedback.</p>
-        <p><strong>Example:</strong> “Give me 3 ideas for my science project.”</p>
-      </div>
-    </div>
-  </section>
+  <div id="content"></div>
 
   <footer>
     © 2025 Study Smarter | Built with love for curious students 💡
   </footer>
 
+  <script>
+    const SUPABASE_URL = 'https://azfipkxegjydpalygjxx.supabase.co'; // Replace with your Supabase URL
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6Zmlwa3hlZ2p5ZHBhbHlnanh4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUxNTQ4OTgsImV4cCI6MjA2MDczMDg5OH0.u_itSrBff5Y5jtT8ozPWGmsLF9Zq3aCXBtwiMPVIOvQ'; // Replace with your Supabase Anon Key
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    async function fetchAndBuildUI() {
+      try {
+        const { data: sections, error: sectionsError } = await supabase
+          .from('sections')
+          .select('id, name');
+
+        if (sectionsError) {
+          throw sectionsError;
+        }
+
+        const { data: tiles, error: tilesError } = await supabase
+          .from('tiles')
+          .select('name, content, section_id');
+
+        if (tilesError) {
+          throw tilesError;
+        }
+
+        buildUI(sections, tiles);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        document.getElementById('content').textContent = "Failed to load data.";
+      }
+    }
+
+    function buildUI(sections, tiles) {
+      const container = document.getElementById('content');
+      const sectionMap = {};
+
+      // Organize tiles by section ID
+      tiles.forEach(tile => {
+        if (!sectionMap[tile.section_id]) {
+          sectionMap[tile.section_id] = [];
+        }
+        sectionMap[tile.section_id].push(tile);
+      });
+
+      // Create sections and tiles
+      sections.forEach(section => {
+        const sectionClass = section.name.toLowerCase().replace(/\s+/g, '-');
+        const sectionEl = document.createElement('section');
+        sectionEl.className = `section ${sectionClass}`;
+        sectionEl.innerHTML = `<h2>${section.name}</h2><div class="tile-grid"></div>`;
+        const tileGrid = sectionEl.querySelector('.tile-grid');
+
+        if (sectionMap[section.id]) {
+          sectionMap[section.id].forEach(tile => {
+            const tileEl = document.createElement('div');
+            tileEl.className = 'tile';
+            tileEl.innerHTML = `<h3>${tile.name}</h3><p>${tile.content}</p>`;
+            tileGrid.appendChild(tileEl);
+          });
+        }
+        container.appendChild(sectionEl);
+      });
+    }
+
+    fetchAndBuildUI();
+  </script>
 </body>
 </html>
