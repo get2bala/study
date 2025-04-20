@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Study Smarter: Superpowers for Your Brain</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Study Smarter</title>
   <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    /* ... (Your existing CSS) ... */
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
 <body>
-  <header>
-    <h1>Study Smarter: Superpowers for Your Brain</h1>
+  <nav>
+    <div><strong>Study Smarter</strong></div>
+    <div class="nav-links" id="navLinks">
+      <!-- Menu items will be populated dynamically -->
+    </div>
+  </nav>
+
+  <!-- <header>
     <p>Level up your learning with fun techniques, examples, and helpful AI tools 🎓</p>
-  </header>
+  </header> -->
 
   <div id="content"></div>
 
@@ -23,70 +30,100 @@
   </footer>
 
   <script>
-    const { createClient } = window.supabase;
-    const SUPABASE_URL = 'https://azfipkxegjydpalygjxx.supabase.co'; // Replace with your Supabase URL
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6Zmlwa3hlZ2p5ZHBhbHlnanh4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUxNTQ4OTgsImV4cCI6MjA2MDczMDg5OH0.u_itSrBff5Y5jtT8ozPWGmsLF9Zq3aCXBtwiMPVIOvQ'; // Replace with your Supabase Anon Key
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
 
+    const { createClient } = window.supabase;
+    const SUPABASE_URL = 'https://azfipkxegjydpalygjxx.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6Zmlwa3hlZ2p5ZHBhbHlnanh4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUxNTQ4OTgsImV4cCI6MjA2MDczMDg5OH0.u_itSrBff5Y5jtT8ozPWGmsLF9Zq3aCXBtwiMPVIOvQ';
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    async function fetchAndBuildUI() {
+    async function loadMenu() {
+      const { data, error } = await supabase
+        .from('tiles')
+        .select('page_name, page_rank')
+        .order('page_rank', { ascending: true });
+
+      if (error) {
+        console.error('Error fetching menu:', error);
+        return;
+      }
+
+      const navLinks = document.getElementById('navLinks');
+      navLinks.innerHTML = '';
+
+      const uniquePages = [...new Map(data.map(item => [item.page_name, item])).values()];
+
+      uniquePages.forEach(item => {
+        const link = document.createElement('a');
+        link.textContent = item.page_name;
+        link.onclick = () => loadPage(item.page_name);
+        navLinks.appendChild(link);
+      });
+    }
+
+    async function loadPage(pageName) {
       try {
-        const { data: sections, error: sectionsError } = await supabase
-          .from('sections')
-          .select('id, name');
-
-        if (sectionsError) {
-          throw sectionsError;
-        }
-
-        const { data: tiles, error: tilesError } = await supabase
+        const { data, error } = await supabase
           .from('tiles')
-          .select('name, content, section_id');
+          .select('page_name, section_name, tile_name, tile_content, page_rank, section_rank, tile_rank')
+          .eq('page_name', pageName)
+          .order('section_rank', { ascending: true })
+          .order('tile_rank', { ascending: true });
 
-        if (tilesError) {
-          throw tilesError;
-        }
+        if (error) throw error;
 
-        buildUI(sections, tiles);
+        buildUI(data);
       } catch (error) {
         console.error('Error fetching data:', error);
         document.getElementById('content').textContent = "Failed to load data.";
       }
     }
 
-    function buildUI(sections, tiles) {
+    function buildUI(data) {
       const container = document.getElementById('content');
+      container.innerHTML = '';
       const sectionMap = {};
 
-      // Organize tiles by section ID
-      tiles.forEach(tile => {
-        if (!sectionMap[tile.section_id]) {
-          sectionMap[tile.section_id] = [];
+      data.forEach(item => {
+        if (!sectionMap[item.section_name]) {
+          sectionMap[item.section_name] = [];
         }
-        sectionMap[tile.section_id].push(tile);
+        sectionMap[item.section_name].push(item);
       });
 
-      // Create sections and tiles
-      sections.forEach(section => {
-        const sectionClass = section.name.toLowerCase().replace(/\s+/g, '-');
-        const sectionEl = document.createElement('section');
-        sectionEl.className = `section ${sectionClass}`;
-        sectionEl.innerHTML = `<h2>${section.name}</h2><div class="tile-grid"></div>`;
+      const pageEl = document.createElement('section');
+      pageEl.className = 'section';
+
+      for (const sectionName in sectionMap) {
+        const sectionEl = document.createElement('div');
+        sectionEl.innerHTML = `<h3>${sectionName}</h3><div class="tile-grid"></div>`;
         const tileGrid = sectionEl.querySelector('.tile-grid');
 
-        if (sectionMap[section.id]) {
-          sectionMap[section.id].forEach(tile => {
-            const tileEl = document.createElement('div');
-            tileEl.className = 'tile';
-            tileEl.innerHTML = `<h3>${tile.name}</h3><p>${tile.content}</p>`;
-            tileGrid.appendChild(tileEl);
-          });
+        sectionMap[sectionName].forEach(tile => {
+          const tileEl = document.createElement('div');
+          tileEl.className = 'tile';
+          tileEl.innerHTML = `<h4>${tile.tile_name}</h4><p>${tile.tile_content}</p>`;
+          tileGrid.appendChild(tileEl);
+        });
+
+        pageEl.appendChild(sectionEl);
+
+        // --- NEW: Check for single tile and add class ---
+        if (sectionMap[sectionName].length === 1) {
+            sectionEl.classList.add('section-single-tile');
         }
-        container.appendChild(sectionEl);
-      });
+      }
+
+      container.appendChild(pageEl);
     }
 
-    fetchAndBuildUI();
+    // Initialize
+    loadMenu();
+    loadPage('Study Basics');
   </script>
 </body>
+
 </html>

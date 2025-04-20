@@ -1,0 +1,162 @@
+/* Reset & General Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  :root {
+    --page-bg-color: #f0f4ff;
+    /* Very light blue */
+    --text-color: #333;
+    --nav-bg-color: rgba(255, 255, 255, 0.8);
+    /* Slightly transparent white */
+    --nav-link-color: #555;
+    --nav-link-hover: #e6e6ff;
+    /* Light purple */
+    --tile-bg-color: #ffffff;
+    --tile-title-color: #222;
+    --tile-text-color: #555;
+    --footer-text-color: #777;
+    --footer-border-color: #ddd;
+    --tile-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    /* Softer shadow */
+    --tile-hover-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    
+  }
+  
+  body {
+    font-family: -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      sans-serif;
+    /* background: var(--page-bg-color); */
+    color: var(--text-color);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(to bottom, #f0f4ff, #e6f7ff);
+    /* Gradient */
+  }
+  
+  /* Navigation */
+  nav {
+    background: var(--nav-bg-color);
+    backdrop-filter: blur(10px);
+    /* Glass effect */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--footer-border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    /* Very subtle */
+  }
+  
+  nav strong {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .nav-links a {
+    color: var(--nav-link-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.15s ease;
+  }
+  
+  .nav-links a:hover {
+    background-color: var(--nav-link-hover);
+  }
+  
+  /* Sections */
+  .section {
+    padding: 40px 20px;
+  }
+  
+  .section h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+  }
+  
+  /* Tiles */
+  .tile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--footer-border-color);
+  }
+  
+  .tile {
+    background-color: var(--tile-bg-color);
+    border-radius: 10px;
+    box-shadow: var(--tile-shadow);
+    padding: 20px;
+    transition: box-shadow 0.15s ease;
+  }
+  
+  .tile:hover {
+    box-shadow: var(--tile-hover-shadow);
+  }
+  
+  .tile h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--tile-title-color);
+    margin-bottom: 10px;
+  }
+  
+  .tile p {
+    font-size: 1rem;
+    color: var(--tile-text-color);
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.85rem;
+    color: var(--footer-text-color);
+    border-top: 1px solid var(--footer-border-color);
+    margin-top: 40px;
+  }
+  
+  /* Single Tile Section */
+  .section-single-tile .tile-grid {
+    display: block;
+  }
+  
+  .section-single-tile .tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+  }
+  
+  .section-single-tile .tile h4 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  .section-single-tile .tile p {
+    font-size: 1.2rem;
+  }
