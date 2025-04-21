@@ -7,8 +7,7 @@
   <title>Study Smarter</title>
   <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-</head>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -18,6 +17,9 @@
       <!-- Menu items will be populated dynamically -->
     </div>
   </nav>
+  <div id="hero">
+    <img id="hero-image" src="homepageimage.png" alt="Study Smarter" />
+  </div>
 
   <!-- <header>
     <p>Level up your learning with fun techniques, examples, and helpful AI tools 🎓</p>
@@ -65,7 +67,23 @@
     }
 
     async function loadPage(pageName) {
+      const heroElement = document.getElementById('hero');
+      const contentElement = document.getElementById('content');
+
+      // Check if the requested page is the "Home" page
+      // *** IMPORTANT: Replace "Home" with the actual page_name for your homepage
+      // if it's different (e.g., "Study Basics" if that's your intended homepage) ***
+      if (pageName === "Home") {
+          heroElement.style.display = 'flex'; // Show the hero section (using 'flex' as defined in your CSS)
+          contentElement.innerHTML = '';    // Clear any loaded content
+          return; // Stop further execution for the home page
+      }
+
+      // If it's NOT the home page, hide the hero and load content
+      heroElement.style.display = 'none'; // Hide the hero section
+
       try {
+        // Fetch data only for non-home pages
         const { data, error } = await supabase
           .from('tiles')
           .select('page_name, section_name, tile_name, tile_content, page_rank, section_rank, tile_rank')
@@ -75,10 +93,10 @@
 
         if (error) throw error;
 
-        buildUI(data);
+        buildUI(data); // Build the UI with fetched data
       } catch (error) {
         console.error('Error fetching data:', error);
-        document.getElementById('content').textContent = "Failed to load data.";
+        contentElement.textContent = "Failed to load data."; // Display error in content area
       }
     }
 
@@ -113,7 +131,7 @@
 
         // --- NEW: Check for single tile and add class ---
         if (sectionMap[sectionName].length === 1) {
-            sectionEl.classList.add('section-single-tile');
+          sectionEl.classList.add('section-single-tile');
         }
       }
 
@@ -122,7 +140,7 @@
 
     // Initialize
     loadMenu();
-    loadPage('Study Basics');
+    // loadPage('Study Basics');
   </script>
 </body>
 
