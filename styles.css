@@ -4,68 +4,58 @@
     margin: 0;
     padding: 0;
   }
-  
+
   :root {
-    --page-bg-color: #f0f4ff;
-    /* Very light blue */
+    --page-bg-color: #f0f4ff; /* Very light blue */
     --text-color: #333;
-    --nav-bg-color: rgba(255, 255, 255, 0.8);
-    /* Slightly transparent white */
+    --nav-bg-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
     --nav-link-color: #555;
-    --nav-link-hover: #e6e6ff;
-    /* Light purple */
+    --nav-link-hover: #e6e6ff; /* Light purple */
     --tile-bg-color: #ffffff;
     --tile-title-color: #222;
     --tile-text-color: #555;
     --footer-text-color: #777;
     --footer-border-color: #ddd;
-    --tile-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    /* Softer shadow */
+    --tile-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Softer shadow */
     --tile-hover-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-    
   }
-  
+
   body {
-    font-family: -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      "Helvetica Neue",
-      Arial,
-      sans-serif;
-    /* background: var(--page-bg-color); */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     color: var(--text-color);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: linear-gradient(to bottom, #f0f4ff, #e6f7ff);
-    /* Gradient */
   }
-  
+
   /* Navigation */
   nav {
     background: var(--nav-bg-color);
     backdrop-filter: blur(10px);
-    /* Glass effect */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
     border-bottom: 1px solid var(--footer-border-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-    /* Very subtle */
+    position: relative; /* Needed for absolute positioning of mobile menu */
   }
-  
+
   nav strong {
     font-size: 1.25rem;
     font-weight: 600;
+    margin-right: 15px;
   }
-  
+
   .nav-links {
     display: flex;
     gap: 15px;
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
   }
-  
+
   .nav-links a {
     color: var(--nav-link-color);
     text-decoration: none;
@@ -74,17 +64,39 @@
     padding: 8px 12px;
     border-radius: 5px;
     transition: background-color 0.15s ease;
+    white-space: nowrap;
   }
-  
+
   .nav-links a:hover {
     background-color: var(--nav-link-hover);
   }
-  
-  /* Sections */
+
+  /* Hamburger Icon - Hidden by default (on desktop) */
+  .hamburger {
+    display: none; /* Hidden on larger screens */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px; /* Clickable area */
+    z-index: 1001; /* Ensure it's above other nav content */
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 5px 0;
+    border-radius: 3px;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* For potential animation */
+  }
+
+  /* --- Sections, Tiles, Footer, Hero (Keep existing styles) --- */
+  /* ... (Paste your existing styles for .section, .tile-grid, .tile, footer, etc. here) ... */
   .section {
     padding: 40px 20px;
   }
-  
+
   .section h3 {
     font-size: 1.75rem;
     font-weight: 700;
@@ -92,8 +104,7 @@
     margin-bottom: 20px;
     padding-bottom: 10px;
   }
-  
-  /* Tiles */
+
   .tile-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -102,7 +113,7 @@
     padding-bottom: 20px;
     border-bottom: 2px solid var(--footer-border-color);
   }
-  
+
   .tile {
     background-color: var(--tile-bg-color);
     border-radius: 10px;
@@ -110,24 +121,23 @@
     padding: 20px;
     transition: box-shadow 0.15s ease;
   }
-  
+
   .tile:hover {
     box-shadow: var(--tile-hover-shadow);
   }
-  
+
   .tile h4 {
     font-size: 1.2rem;
     font-weight: 600;
     color: var(--tile-title-color);
     margin-bottom: 10px;
   }
-  
+
   .tile p {
     font-size: 1rem;
     color: var(--tile-text-color);
   }
-  
-  /* Footer */
+
   footer {
     text-align: center;
     padding: 20px;
@@ -136,12 +146,11 @@
     border-top: 1px solid var(--footer-border-color);
     margin-top: 40px;
   }
-  
-  /* Single Tile Section */
+
   .section-single-tile .tile-grid {
     display: block;
   }
-  
+
   .section-single-tile .tile {
     display: flex;
     flex-direction: column;
@@ -150,31 +159,28 @@
     padding: 30px;
     border-radius: 10px;
   }
-  
+
   .section-single-tile .tile h4 {
     font-size: 2.2rem;
     font-weight: 600;
     margin-bottom: 15px;
   }
-  
+
   .section-single-tile .tile p {
     font-size: 1.2rem;
   }
 
-  /* Hero Section (Homepage) */
-#hero {
+  #hero {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
-    /* Full viewport height */
     text-align: center;
     background-color: #e6f7ff;
-    /* Light background */
     color: #333;
   }
-  
+
   #hero-image {
     max-width: 80%;
     max-height: 60%;
@@ -183,17 +189,57 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     object-fit: contain;
-    /* Or 'cover', experiment */
   }
-  
+
   #hero-text h1 {
     font-size: 3.0rem;
-    /* Bigger title */
     font-weight: 700;
     margin-bottom: 10px;
   }
-  
+
   #hero-text p {
     font-size: 1.2rem;
     line-height: 1.6;
-  } 
+  }
+  /* --- End of Existing Styles --- */
+
+  /* --- RESPONSIVE MENU STYLES --- */
+  @media (max-width: 900px) {
+    .hamburger {
+        display: block; /* Show hamburger on small screens */
+    }
+
+    .nav-links {
+        display: none; /* Hide nav links by default on mobile */
+        flex-direction: column;
+        position: absolute; /* Position relative to nav */
+        top: 100%; /* Position below the nav bar */
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        padding: 10px 0; /* Add some padding */
+        border-top: 1px solid var(--footer-border-color); /* Separator */
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        display: flex; /* Show nav links when active */
+    }
+
+    .nav-links a {
+        padding: 12px 20px; /* Full width clickable area */
+        width: 100%;
+        text-align: left;
+        border-radius: 0; /* Remove radius for full-width items */
+        border-bottom: 1px solid var(--footer-border-color); /* Separator lines */
+    }
+    .nav-links a:last-child {
+        border-bottom: none; /* Remove border from last item */
+    }
+
+    .nav-links a:hover {
+        background-color: var(--nav-link-hover);
+    }
+  }

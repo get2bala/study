@@ -13,6 +13,11 @@
 <body>
   <nav>
     <div><strong>Study Smarter</strong></div>
+    <button class="hamburger" id="hamburger-button" aria-label="Toggle Menu" onclick="toggleMenu()">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+  </button>
     <div class="nav-links" id="navLinks">
       <!-- Menu items will be populated dynamically -->
     </div>
@@ -61,7 +66,13 @@
       uniquePages.forEach(item => {
         const link = document.createElement('a');
         link.textContent = item.page_name;
-        link.onclick = () => loadPage(item.page_name);
+        link.onclick = () => {
+          loadPage(item.page_name);
+          // Close menu on link click (mobile)
+          if (navLinks.classList.contains('active')) {
+            toggleMenu();
+          }
+        };
         navLinks.appendChild(link);
       });
     }
