@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Variation Showcase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for specific variations if needed */
+        body {
+            font-family: 'Inter', sans-serif; /* Using Inter font as recommended */
+        }
+
+        /* Style for the Side Navigation Tree active link */
+        .sidenav-active {
+            background-color: #e0f2fe; /* light-sky-100 */
+            color: #0c4a6e; /* sky-800 */
+            font-weight: 600;
+        }
+
+        /* Basic styling for Mind Map representation */
+        .mindmap-node {
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            margin: 10px;
+            border-radius: 8px;
+            display: inline-block;
+            background-color: #f0f9ff; /* sky-50 */
+        }
+        .mindmap-children {
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 1px dashed #ccc;
+        }
+
+        /* Ensure horizontal scroll container works */
+        .horizontal-scroll-container {
+            display: flex;
+            overflow-x: auto;
+            padding-bottom: 1rem; /* Add padding for scrollbar visibility */
+            gap: 1rem;
+            scroll-snap-type: x mandatory; /* Optional: makes scrolling snap */
+        }
+        .horizontal-scroll-item {
+            flex: 0 0 auto; /* Prevent items from shrinking */
+            width: 300px; /* Example fixed width */
+            scroll-snap-align: start; /* Optional: align items on snap */
+        }
+
+        /* Simple Parallax-like effect (background fixed) */
+        .parallax-section {
+            min-height: 60vh; /* Adjust as needed */
+            background-attachment: fixed; /* Creates the parallax effect */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+        .parallax-content {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            max-width: 80%;
+        }
+
+        /* Wizard step indicator */
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background-color: #f3f4f6; /* gray-100 */
+            border-radius: 0.5rem;
+        }
+        .step {
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 9999px; /* pill shape */
+            background-color: #d1d5db; /* gray-300 */
+            color: #4b5563; /* gray-600 */
+            font-size: 0.875rem;
+            cursor: default;
+        }
+        .step-active {
+            background-color: #3b82f6; /* blue-500 */
+            color: white;
+            font-weight: 600;
+        }
+        .step-visited {
+             background-color: #9ca3af; /* gray-400 */
+             color: white;
+        }
+
+        /* Ensure details/summary icons work */
+        details > summary {
+          list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+          display: none;
+        }
+        details > summary::before {
+          content: '+';
+          margin-right: 0.5rem;
+          font-weight: bold;
+          display: inline-block;
+          width: 1em; /* Ensure alignment */
+          text-align: center;
+        }
+        details[open] > summary::before {
+          content: '−';
+        }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+        <header class="bg-gradient-to-r from-sky-500 to-indigo-600 p-6 text-white">
+            <h1 class="text-2xl md:text-3xl font-bold mb-4">JSON Data Presentation Variations</h1>
+            <div class="flex flex-col sm:flex-row sm:items-center">
+                <label for="variation-select" class="mb-2 sm:mb-0 sm:mr-3 font-semibold flex-shrink-0">Choose a UI Variation:</label>
+                <select id="variation-select" class="block w-full sm:w-auto p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-800">
+                    <option value="accordion">1. Minimalist Accordion</option>
+                    <option value="sidenav">2. Side Navigation Tree</option>
+                    <option value="parallax">3. Immersive Sections</option>
+                    <option value="cards">4. Interactive Card Grid</option>
+                    <option value="tabs">5. Tabbed Content View</option>
+                    <option value="wizard">6. Stepped Flow / Wizard</option>
+                    <option value="mindmap">7. Simplified Mind Map</option>
+                    <option value="feed">8. Content-Focused Feed</option>
+                    <option value="horizontal">9. Horizontal Scrolling Tiles</option>
+                    <option value="dashboard">10. Dynamic Dashboard Widgets</option>
+                </select>
+            </div>
+        </header>
+
+        <main id="content-area" class="p-4 md:p-8 min-h-[500px] transition-opacity duration-300">
+            <p class="text-gray-500">Select a variation from the dropdown above to see the content presentation.</p>
+        </main>
+    </div>
+
+    <script>
+        // --- Data ---
+        const jsonData = {
+          "document_title": "Exploration of Advanced Concepts",
+          "sections": [
+            {
+              "section_title": "Theoretical Physics Frontiers",
+              "subsections": [
+                { "subsection_title": "String Theory Implications", "content": "An overview of how string theory attempts to reconcile general relativity and quantum mechanics, proposing that fundamental particles are one-dimensional 'strings'." },
+                { "subsection_title": "Multiverse Hypotheses", "content": ["Level I: Regions beyond our cosmic horizon.", "Level II: Universes with different physical constants (Bubble Universes).", "Level III: Many-worlds interpretation of quantum mechanics.", "Level IV: Ultimate Ensemble (Mathematical Universes)."] },
+                { "subsection_title": "Quantum Gravity Models", "content": "Discusses approaches like Loop Quantum Gravity and Causal Dynamical Triangulations aiming to describe gravity within the framework of quantum mechanics." }
+              ]
+            },
+            {
+              "section_title": "Artificial Intelligence Evolution",
+              "subsections": [
+                { "subsection_title": "Machine Learning Paradigms", "content": "Covers supervised, unsupervised, and reinforcement learning, including deep learning and neural network architectures." },
+                { "subsection_title": "Artificial General Intelligence (AGI)", "content": "Explores the path towards AI with human-like cognitive abilities, including challenges in reasoning, consciousness, and creativity." },
+                { "subsection_title": "AI Ethics and Safety", "content": ["Bias in algorithms and data.", "Job displacement concerns.", "The control problem for superintelligence.", "Transparency and explainability (XAI)."] },
+                { "subsection_title": "Current Applications", "content": "Examples include natural language processing, computer vision, autonomous systems, recommendation engines, and scientific discovery." }
+              ]
+            },
+            { "section_title": "Neuroscience and Consciousness", "content": "This section delves into the biological basis of thought, perception, and self-awareness, examining brain structures and neural correlates of consciousness. Due to the complexity, specific subsections are grouped in internal research documents." },
+            {
+              "section_title": "Advanced Materials Science",
+              "subsections": [
+                { "subsection_title": "Metamaterials", "content": "Engineered materials with properties not found in naturally occurring substances, designed by structuring them at a sub-wavelength scale. Applications include invisibility cloaks and perfect lenses." },
+                { "subsection_title": "Graphene and 2D Materials", "content": "Exploring the unique electrical, thermal, and mechanical properties of single-atom-thick materials like graphene, silicene, and phosphorene." },
+                { "subsection_title": "Aerogels and Lightweight Composites", "content": ["Properties of ultra-low-density solid materials.", "Applications in insulation, aerospace, and energy absorption.", "Challenges in manufacturing and durability."] }
+              ]
+            },
+            { "section_title": "Computational Biology", "content": ["Using data analysis and theoretical methods to study biological systems.", "Covers bioinformatics, genomic sequencing analysis, and protein folding prediction.", "Drug discovery and personalized medicine applications.", "Systems biology modeling."] },
+            {
+              "section_title": "Space Exploration Technologies",
+              "subsections": [
+                { "subsection_title": "Propulsion Systems", "content": "Overview of chemical rockets, ion drives, solar sails, and speculative concepts like fusion rockets and antimatter drives." },
+                { "subsection_title": "Life Support Systems", "content": "Challenges and solutions for maintaining habitable environments during long-duration space missions, including air revitalization, water recycling, and radiation shielding." },
+                { "subsection_title": "In-Situ Resource Utilization (ISRU)", "content": ["Techniques for harvesting and using resources found on other celestial bodies (e.g., water ice on Mars, Helium-3 on the Moon).", "Reducing launch mass and mission costs.", "Enabling long-term extraterrestrial presence."] },
+                { "subsection_title": "Terraforming Concepts", "content": "Theoretical processes for modifying a planet's atmosphere, temperature, surface topography, and ecology to be similar to Earth's environment." }
+              ]
+            },
+            {
+              "section_title": "Renewable Energy Innovations",
+              "subsections": [
+                { "subsection_title": "Next-Generation Solar", "content": "Developments in perovskite solar cells, multi-junction cells, transparent photovoltaics, and space-based solar power." },
+                { "subsection_title": "Fusion Power Progress", "content": "Review of major fusion projects (ITER, DEMO) and private ventures exploring different confinement approaches (tokamaks, stellarators, inertial confinement)." },
+                { "subsection_title": "Advanced Geothermal Systems", "content": "Techniques for accessing deeper, hotter geothermal resources and improving energy extraction efficiency." },
+                { "subsection_title": "Energy Storage Solutions", "content": "Beyond lithium-ion: exploring flow batteries, solid-state batteries, compressed air storage, and hydrogen fuel cells." }
+              ]
+            },
+             {
+              "section_title": "Quantum Computing",
+              "subsections": [
+                { "subsection_title": "Qubit Modalities", "content": "Comparison of different physical implementations of qubits, including superconducting circuits, trapped ions, photonic systems, and topological qubits." },
+                { "subsection_title": "Quantum Algorithms", "content": ["Shor's algorithm for factorization.", "Grover's algorithm for unstructured search.", "Quantum simulation for chemistry and materials science.", "Optimization problems."] },
+                { "subsection_title": "Error Correction and Fault Tolerance", "content": "Addressing the fragility of quantum states (decoherence) through quantum error-correcting codes and fault-tolerant architectures." }
+              ]
+            },
+            {
+              "section_title": "Virtual and Augmented Reality",
+              "subsections": [
+                { "subsection_title": "Hardware Evolution", "content": "Trends in display resolution, field of view, tracking accuracy (inside-out vs. outside-in), haptic feedback, and form factor reduction." },
+                { "subsection_title": "Software and Platforms", "content": "Development environments, content creation tools, social VR platforms, and enterprise applications for training, design, and collaboration." },
+                { "subsection_title": "The Metaverse Concept", "content": ["Vision of a persistent, shared virtual space.", "Interoperability challenges between platforms.", "Economic and social implications.", "Technological hurdles to achieving a true metaverse."] }
+              ]
+            },
+            {
+              "section_title": "Cryptography and Security",
+              "subsections": [
+                { "subsection_title": "Post-Quantum Cryptography (PQC)", "content": "Developing cryptographic algorithms resistant to attacks by quantum computers, focusing on lattice-based, hash-based, code-based, and multivariate cryptography." },
+                { "subsection_title": "Homomorphic Encryption", "content": "Allows computation on encrypted data without decrypting it first, enhancing privacy in cloud computing and data analysis." },
+                { "subsection_title": "Zero-Knowledge Proofs", "content": "Methods by which one party can prove the truth of a statement to another party without revealing any information beyond the truth of the statement itself." },
+                { "subsection_title": "Decentralized Identity", "content": "Using blockchain and distributed ledger technology to create self-sovereign identity systems, giving users more control over their personal data." }
+              ]
+            },
+            { "section_title": "Ethical Considerations", "content": "A concluding section discussing the societal impact, ethical dilemmas, and responsible development guidelines pertinent to all the advanced concepts covered in this document." }
+          ]
+        };
+
+        // --- DOM Elements ---
+        const contentArea = document.getElementById('content-area');
+        const variationSelect = document.getElementById('variation-select');
+
+        // --- Helper Function to Render Content ---
+        function renderContent(content) {
+            if (Array.isArray(content)) {
+                // Render bullet points
+                const ul = document.createElement('ul');
+                ul.className = 'list-disc list-inside space-y-1 text-gray-700 mt-2';
+                content.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    ul.appendChild(li);
+                });
+                return ul;
+            } else if (typeof content === 'string') {
+                // Render paragraph
+                const p = document.createElement('p');
+                p.className = 'text-gray-700 mt-2';
+                p.textContent = content;
+                return p;
+            }
+            return document.createTextNode(''); // Return empty text node if content is invalid
+        }
+
+        // --- Variation Rendering Functions ---
+
+        // 1. Minimalist Accordion
+        function renderAccordion() {
+            contentArea.innerHTML = ''; // Clear previous content
+            const accordionContainer = document.createElement('div');
+            accordionContainer.className = 'space-y-3';
+
+            jsonData.sections.forEach((section, index) => {
+                const details = document.createElement('details');
+                details.className = 'bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden';
+                // Optional: Open the first item by default
+                // if (index === 0) details.open = true;
+
+                const summary = document.createElement('summary');
+                summary.className = 'p-4 cursor-pointer font-semibold text-lg text-gray-800 hover:bg-gray-50 flex justify-between items-center';
+                summary.textContent = section.section_title;
+
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'p-4 border-t border-gray-200';
+
+                if (section.subsections && section.subsections.length > 0) {
+                    section.subsections.forEach(sub => {
+                        const subContainer = document.createElement('div');
+                        subContainer.className = 'mb-3 pb-3 border-b border-gray-100 last:border-b-0';
+                        const subTitle = document.createElement('h4');
+                        subTitle.className = 'font-semibold text-md text-gray-700 mb-1';
+                        subTitle.textContent = sub.subsection_title;
+                        subContainer.appendChild(subTitle);
+                        subContainer.appendChild(renderContent(sub.content));
+                        contentDiv.appendChild(subContainer);
+                    });
+                } else if (section.content) {
+                    contentDiv.appendChild(renderContent(section.content));
+                }
+
+                details.appendChild(summary);
+                details.appendChild(contentDiv);
+                accordionContainer.appendChild(details);
+            });
+            contentArea.appendChild(accordionContainer);
+        }
+
+        // 2. Side Navigation Tree
+        function renderSideNav() {
+            contentArea.innerHTML = ''; // Clear previous content
+            const container = document.createElement('div');
+            container.className = 'flex flex-col md:flex-row gap-6'; // Responsive layout
+
+            const nav = document.createElement('nav');
+            nav.className = 'w-full md:w-1/4 lg:w-1/5 bg-gray-50 p-4 rounded-lg border border-gray-200 flex-shrink-0 h-fit mb-4 md:mb-0'; // Added h-fit
+            const navList = document.createElement('ul');
+            navList.className = 'space-y-1';
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'w-full md:w-3/4 lg:w-4/5'; // Takes remaining space
+
+            jsonData.sections.forEach((section, sectionIndex) => {
+                const sectionLi = document.createElement('li');
+                const sectionLink = document.createElement('a');
+                sectionLink.href = `#section-${sectionIndex}`;
+                sectionLink.textContent = section.section_title;
+                sectionLink.className = 'block p-2 rounded-md font-semibold text-gray-700 hover:bg-gray-200';
+                sectionLink.dataset.target = `content-section-${sectionIndex}`;
+                sectionLi.appendChild(sectionLink);
+
+                const subList = document.createElement('ul');
+                subList.className = 'ml-4 mt-1 space-y-1';
+
+                if (section.subsections && section.subsections.length > 0) {
+                    section.subsections.forEach((sub, subIndex) => {
+                        const subLi = document.createElement('li');
+                        const subLink = document.createElement('a');
+                        subLink.href = `#section-${sectionIndex}-sub-${subIndex}`;
+                        subLink.textContent = sub.subsection_title;
+                        subLink.className = 'block p-2 rounded-md text-sm text-gray-600 hover:bg-gray-200';
+                        subLink.dataset.target = `content-section-${sectionIndex}-sub-${subIndex}`;
+                        subLi.appendChild(subLink);
+                        subList.appendChild(subLi);
+                    });
+                    sectionLi.appendChild(subList);
+                }
+                navList.appendChild(sectionLi);
+
+                // Create content blocks (initially hidden)
+                const sectionContentBlock = document.createElement('div');
+                sectionContentBlock.id = `content-section-${sectionIndex}`;
+                sectionContentBlock.className = 'mb-6 hidden'; // Start hidden
+                const sectionTitleH3 = document.createElement('h3');
+                sectionTitleH3.className = 'text-2xl font-bold mb-4 text-gray-800 border-b pb-2';
+                sectionTitleH3.textContent = section.section_title;
+                sectionContentBlock.appendChild(sectionTitleH3);
+
+                if (section.subsections && section.subsections.length > 0) {
+                    section.subsections.forEach((sub, subIndex) => {
+                        const subContentBlock = document.createElement('div');
+                        subContentBlock.id = `content-section-${sectionIndex}-sub-${subIndex}`;
+                        subContentBlock.className = 'mb-4';
+                        const subTitleH4 = document.createElement('h4');
+                        subTitleH4.className = 'text-xl font-semibold mb-2 text-gray-700';
+                        subTitleH4.textContent = sub.subsection_title;
+                        subContentBlock.appendChild(subTitleH4);
+                        subContentBlock.appendChild(renderContent(sub.content));
+                        sectionContentBlock.appendChild(subContentBlock); // Add sub-content to section block
+                    });
+                } else if (section.content) {
+                    sectionContentBlock.appendChild(renderContent(section.content));
+                }
+                contentDiv.appendChild(sectionContentBlock);
+            });
+
+            nav.appendChild(navList);
+            container.appendChild(nav);
+            container.appendChild(contentDiv);
+            contentArea.appendChild(container);
+
+            // Add click listeners for navigation
+            const allLinks = nav.querySelectorAll('a');
+            const allContentBlocks = contentDiv.querySelectorAll('div[id^="content-section-"]');
+
+            allLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.dataset.target;
+
+                    // Hide all content blocks
+                    allContentBlocks.forEach(block => block.classList.add('hidden'));
+
+                    // Remove active class from all links
+                    allLinks.forEach(l => l.classList.remove('sidenav-active'));
+
+                    // Show the target content block(s)
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        // If it's a subsection link, show its parent section block too
+                        if (targetId.includes('-sub-')) {
+                            const parentSectionId = targetId.substring(0, targetId.indexOf('-sub-'));
+                             const parentSectionBlock = document.getElementById(parentSectionId);
+                             if (parentSectionBlock) parentSectionBlock.classList.remove('hidden');
+                             // Scroll to subsection title smoothly
+                             const subTitleElement = targetElement.querySelector('h4');
+                             if (subTitleElement) subTitleElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                        } else {
+                            // If it's a main section link, just show the section block
+                            targetElement.classList.remove('hidden');
+                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+
+                    // Add active class to the clicked link
+                    link.classList.add('sidenav-active');
+                    // Also highlight parent if a sublink is clicked
+                     if (link.parentElement.parentElement.previousElementSibling?.tagName === 'A') {
+                         link.parentElement.parentElement.previousElementSibling.classList.add('sidenav-active');
+                     }
+                });
+            });
+
+            // Show the first section by default
+            if (allLinks.length > 0) {
+                allLinks[0].click();
+            }
+        }
+
+        // 3. Immersive Parallax Sections (Simplified)
+        function renderParallax() {
+            contentArea.innerHTML = ''; // Clear previous content
+            const parallaxContainer = document.createElement('div');
+            // Define some background images or colors (replace with actual URLs or more colors)
+            const backgrounds = [
+                'bg-gradient-to-br from-purple-600 to-blue-500', // Example gradient
+                'bg-gradient-to-br from-green-500 to-teal-400',
+                'bg-gradient-to-br from-yellow-400 to-orange-500',
+                'bg-gradient-to-br from-pink-500 to-red-500',
+                'bg-gradient-to-br from-indigo-500 to-cyan-400',
+                'bg-gradient-to-br from-lime-400 to-emerald-500',
+                'bg-gradient-to-br from-rose-500 to-fuchsia-600',
+                'bg-gradient-to-br from-amber-500 to-yellow-600',
+                'bg-gradient-to-br from-violet-600 to-purple-700',
+                'bg-gradient-to-br from-sky-400 to-blue-600',
+                'bg-gradient-to-br from-emerald-500 to-green-600',
+            ];
+
+            jsonData.sections.forEach((section, index) => {
+                const sectionDiv = document.createElement('div');
+                // Apply a background and parallax styling
+                // Use modulo operator to cycle through backgrounds if there are more sections than backgrounds
+                sectionDiv.className = `parallax-section ${backgrounds[index % backgrounds.length]}`;
+
+                const contentWrapper = document.createElement('div');
+                contentWrapper.className = 'parallax-content text-center'; // Centered content
+
+                const title = document.createElement('h2');
+                title.className = 'text-3xl md:text-4xl font-bold mb-4';
+                title.textContent = section.section_title;
+                contentWrapper.appendChild(title);
+
+                if (section.subsections && section.subsections.length > 0) {
+                    section.subsections.forEach(sub => {
+                        const subContainer = document.createElement('div');
+                        subContainer.className = 'mb-3 text-left'; // Align text left within center block
+                        const subTitle = document.createElement('h4');
+                        subTitle.className = 'font-semibold text-lg mb-1';
+                        subTitle.textContent = sub.subsection_title;
+                        subContainer.appendChild(subTitle);
+                        const renderedContent = renderContent(sub.content);
+                        renderedContent.classList.add('text-gray-200'); // Lighter text for dark bg
+                        if(renderedContent.tagName === 'UL') {
+                            renderedContent.classList.remove('text-gray-700');
+                        } else {
+                             renderedContent.classList.replace('text-gray-700', 'text-gray-200');
+                        }
+                        subContainer.appendChild(renderedContent);
+                        contentWrapper.appendChild(subContainer);
+                    });
+                } else if (section.content) {
+                     const renderedContent = renderContent(section.content);
+                     renderedContent.classList.add('text-gray-200'); // Lighter text for dark bg
+                     if(renderedContent.tagName === 'UL') {
+                            renderedContent.classList.remove('text-gray-700');
+                        } else {
+                             renderedContent.classList.replace('text-gray-700', 'text-gray-200');
+                        }
+                     contentWrapper.appendChild(renderedContent);
+                }
+
+                sectionDiv.appendChild(contentWrapper);
+                parallaxContainer.appendChild(sectionDiv);
+            });
+            contentArea.appendChild(parallaxContainer);
+             // Note: True parallax often requires JS for more complex effects on scroll.
+             // This uses `background-attachment: fixed` for a simpler CSS-only effect.
+             // For this effect to work well, the main body/html needs sufficient height or scrollable content.
+             // We remove the min-height on the content area for this variation.
+             contentArea.style.minHeight = 'auto';
+        }
+
+        // 4. Interactive Card Grid
+        function renderCards() {
+            contentArea.innerHTML = ''; // Clear previous content
+            contentArea.style.minHeight = '500px'; // Restore min-height
+            const gridContainer = document.createElement('div');
+            gridContainer.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6';
+
+            jsonData.sections.forEach(section => {
+                const card = document.createElement('div');
+                card.className = 'bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden transition-shadow duration-300 hover:shadow-xl flex flex-col'; // Added flex
+
+                const cardHeader = document.createElement('div');
+                cardHeader.className = 'p-4 bg-gradient-to-r from-sky-100 to-indigo-100 border-b border-gray-200';
+                const title = document.createElement('h3');
+                title.className = 'text-lg font-semibold text-gray-800';
+                title.textContent = section.section_title;
+                cardHeader.appendChild(title);
+                card.appendChild(cardHeader);
+
+                const cardBody = document.createElement('div');
+                cardBody.className = 'p-4 flex-grow'; // Added flex-grow
+
+                // Show a preview or subsections directly
+                if (section.subsections && section.subsections.length > 0) {
+                     const subList = document.createElement('ul');
+                     subList.className = 'space-y-2';
+                     section.subsections.slice(0, 2).forEach(sub => { // Show first 2 subsections as preview
+                         const li = document.createElement('li');
+                         li.className = 'text-sm text-gray-600 font-medium';
+                         li.textContent = `• ${sub.subsection_title}`;
+                         subList.appendChild(li);
+                     });
+                     if (section.subsections.length > 2) {
+                         const li = document.createElement('li');
+                         li.className = 'text-sm text-gray-500 italic';
+                         li.textContent = `+ ${section.subsections.length - 2} more...`;
+                         subList.appendChild(li);
+                     }
+                     cardBody.appendChild(subList);
+
+                } else if (section.content) {
+                    const previewText = Array.isArray(section.content) ? section.content[0] : section.content;
+                    const p = document.createElement('p');
+                    p.className = 'text-sm text-gray-600 line-clamp-3'; // Limit lines
+                    p.textContent = previewText;
+                    cardBody.appendChild(p);
+                }
+
+                card.appendChild(cardBody);
+
+                const cardFooter = document.createElement('div');
+                cardFooter.className = 'p-3 bg-gray-50 border-t border-gray-200 text-right';
+                const button = document.createElement('button');
+                button.className = 'text-sm text-indigo-600 hover:text-indigo-800 font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded';
+                button.textContent = 'View Details';
+                button.onclick = () => showModal(section); // Open modal on click
+                cardFooter.appendChild(button);
+                card.appendChild(cardFooter);
+
+                gridContainer.appendChild(card);
+            });
+            contentArea.appendChild(gridContainer);
+        }
+
+        // Modal function for Card Grid
+        function showModal(section) {
+            // Remove existing modal first
+            const existingModal = document.getElementById('detail-modal');
+            if (existingModal) existingModal.remove();
+
+            const modal = document.createElement('div');
+            modal.id = 'detail-modal';
+            modal.className = 'fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 z-50';
+            modal.onclick = (e) => { if (e.target === modal) modal.remove(); }; // Close on backdrop click
+
+            const modalContent = document.createElement('div');
+            modalContent.className = 'bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto'; // Added max-h and overflow
+
+            const modalHeader = document.createElement('div');
+            modalHeader.className = 'p-5 border-b border-gray-200 flex justify-between items-center sticky top-0 bg-white';
+            const modalTitle = document.createElement('h2');
+            modalTitle.className = 'text-xl font-bold text-gray-900';
+            modalTitle.textContent = section.section_title;
+            const closeButton = document.createElement('button');
+            closeButton.innerHTML = '&times;'; // Use HTML entity for 'x'
+            closeButton.className = 'text-gray-500 hover:text-gray-800 text-3xl font-bold leading-none focus:outline-none';
+            closeButton.onclick = () => modal.remove();
+            modalHeader.appendChild(modalTitle);
+            modalHeader.appendChild(closeButton);
+
+            const modalBody = document.createElement('div');
+            modalBody.className = 'p-5';
+
+            if (section.subsections && section.subsections.length > 0) {
+                section.subsections.forEach(sub => {
+                    const subContainer = document.createElement('div');
+                    subContainer.className = 'mb-4 pb-4 border-b border-gray-100 last:border-b-0';
+                    const subTitle = document.createElement('h4');
+                    subTitle.className = 'font-semibold text-lg text-gray-800 mb-1';
+                    subTitle.textContent = sub.subsection_title;
+                    subContainer.appendChild(subTitle);
+                    subContainer.appendChild(renderContent(sub.content));
+                    modalBody.appendChild(subContainer);
+                });
+            } else if (section.content) {
+                modalBody.appendChild(renderContent(section.content));
+            }
+
+            modalContent.appendChild(modalHeader);
+            modalContent.appendChild(modalBody);
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal); // Append modal to body
+        }
+
+
+        // 5. Tabbed Content View
+        function renderTabs() {
+            contentArea.innerHTML = ''; // Clear previous content
+            contentArea.style.minHeight = '500px'; // Restore min-height
+            const tabContainer = document.createElement('div');
+
+            const tabList = document.createElement('div');
+            tabList.className = 'flex border-b border-gray-200 mb-4 flex-wrap'; // Added flex-wrap
+
+            const tabContentContainer = document.createElement('div');
+
+            jsonData.sections.forEach((section, index) => {
+                // Create Tab Button
+                const tabButton = document.createElement('button');
+                tabButton.textContent = section.section_title;
+                tabButton.className = `py-3 px-4 md:px-6 text-sm md:text-base font-medium text-center border-b-2 border-transparent hover:text-indigo-600 hover:border-indigo-300 focus:outline-none whitespace-nowrap`;
+                tabButton.dataset.target = `tab-content-${index}`;
+                if (index === 0) {
+                    tabButton.classList.add('text-indigo-600', 'border-indigo-500'); // Active state
+                } else {
+                    tabButton.classList.add('text-gray-500');
+                }
+                tabList.appendChild(tabButton);
+
+                // Create Tab Content Panel
+                const tabContent = document.createElement('div');
+                tabContent.id = `tab-content-${index}`;
+                tabContent.className = 'p-1'; // Add padding
+                if (index !== 0) {
+                    tabContent.classList.add('hidden'); // Hide inactive tabs
+                }
+
+                if (section.subsections && section.subsections.length > 0) {
+                     section.subsections.forEach(sub => {
+                        const subContainer = document.createElement('div');
+                        subContainer.className = 'mb-4 pb-4 border-b border-gray-100 last:border-b-0';
+                        const subTitle = document.createElement('h4');
+                        subTitle.className = 'font-semibold text-lg text-gray-800 mb-1';
+                        subTitle.textContent = sub.subsection_title;
+                        subContainer.appendChild(subTitle);
+                        subContainer.appendChild(renderContent(sub.content));
+                        tabContent.appendChild(subContainer);
+                    });
+                } else if (section.content) {
+                    tabContent.appendChild(renderContent(section.content));
+                }
+                tabContentContainer.appendChild(tabContent);
+            });
+
+            tabContainer.appendChild(tabList);
+            tabContainer.appendChild(tabContentContainer);
+            contentArea.appendChild(tabContainer);
+
+            // Add Tab Click Logic
+            const allTabButtons = tabList.querySelectorAll('button');
+            const allTabContents = tabContentContainer.querySelectorAll('div[id^="tab-content-"]');
+
+            allTabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.dataset.target;
+
+                    // Update button styles
+                    allTabButtons.forEach(btn => {
+                        btn.classList.remove('text-indigo-600', 'border-indigo-500');
+                        btn.classList.add('text-gray-500', 'border-transparent');
+                    });
+                    button.classList.add('text-indigo-600', 'border-indigo-500');
+                    button.classList.remove('text-gray-500', 'border-transparent');
+
+
+                    // Update content visibility
+                    allTabContents.forEach(content => {
+                        if (content.id === targetId) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+        }
+
+        // 6. Stepped Flow / Wizard
+        let currentStep = 0; // State for the wizard
+
+        function renderWizard(stepIndex = 0) {
+            contentArea.innerHTML = ''; // Clear previous content
+            contentArea.style.minHeight = '500px'; // Restore min-height
+            currentStep = stepIndex;
+            const wizardContainer = document.createElement('div');
+
+            // --- Step Indicator ---
+            const indicator = document.createElement('div');
+            indicator.className = 'step-indicator mb-6';
+            jsonData.sections.forEach((section, index) => {
+                 const stepDiv = document.createElement('div');
+                 stepDiv.className = 'step';
+                 stepDiv.textContent = `${index + 1}`;
+                 if (index === currentStep) {
+                     stepDiv.classList.add('step-active');
+                 } else if (index < currentStep) {
+                     stepDiv.classList.add('step-visited');
+                 }
+                 indicator.appendChild(stepDiv);
+                 if (index < jsonData.sections.length - 1) {
+                    const connector = document.createElement('div');
+                    connector.className = 'flex-grow border-t-2 border-gray-300 self-center mx-2';
+                    if(index < currentStep) connector.classList.add('border-blue-500'); // Color visited connectors
+                    indicator.appendChild(connector);
+                 }
+            });
+            wizardContainer.appendChild(indicator);
+
+
+            // --- Content for Current Step ---
+            const section = jsonData.sections[currentStep];
+            const stepContent = document.createElement('div');
+            stepContent.className = 'bg-gray-50 p-6 rounded-lg border border-gray-200';
+
+            const title = document.createElement('h2');
+            title.className = 'text-2xl font-bold mb-4 text-gray-800';
+            title.textContent = `${currentStep + 1}. ${section.section_title}`;
+            stepContent.appendChild(title);
+
+            if (section.subsections && section.subsections.length > 0) {
+                 section.subsections.forEach(sub => {
+                    const subContainer = document.createElement('div');
+                    subContainer.className = 'mb-4 pb-4 border-b border-gray-100 last:border-b-0';
+                    const subTitle = document.createElement('h4');
+                    subTitle.className = 'font-semibold text-lg text-gray-800 mb-1';
+                    subTitle.textContent = sub.subsection_title;
+                    subContainer.appendChild(subTitle);
+                    subContainer.appendChild(renderContent(sub.content));
+                    stepContent.appendChild(subContainer);
+                });
+            } else if (section.content) {
+                stepContent.appendChild(renderContent(section.content));
+            }
+            wizardContainer.appendChild(stepContent);
+
+            // --- Navigation Buttons ---
+            const navButtons = document.createElement('div');
+            navButtons.className = 'mt-6 flex justify-between';
+
+            const prevButton = document.createElement('button');
+            prevButton.textContent = 'Previous';
+            prevButton.className = 'px-6 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 disabled:opacity-50 disabled:cursor-not-allowed';
+            prevButton.disabled = currentStep === 0;
+            prevButton.onclick = () => renderWizard(currentStep - 1);
+
+            const nextButton = document.createElement('button');
+            nextButton.textContent = 'Next';
+             nextButton.className = 'px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed';
+            nextButton.disabled = currentStep === jsonData.sections.length - 1;
+            nextButton.onclick = () => renderWizard(currentStep + 1);
+
+            navButtons.appendChild(prevButton);
+            navButtons.appendChild(nextButton);
+            wizardContainer.appendChild(navButtons);
+
+            contentArea.appendChild(wizardContainer);
+        }
+
+        // 7. Simplified Mind Map
+        function renderMindMap() {
+            contentArea.innerHTML = ''; // Clear previous content
+             contentArea.style.minHeight = '500px'; // Restore min-height
+            const mapContainer = document.createElement('div');
+            mapContainer.className = 'p-4 text-center'; // Center the root
+
+            const rootNode = document.createElement('div');
+            rootNode.className = 'mindmap-node bg-indigo-100 border-indigo-300 font-bold text-lg';
+            rootNode.textContent = jsonData.document_title;
+            mapContainer.appendChild(rootNode);
+
+            const sectionsContainer = document.createElement('div');
+            sectionsContainer.className = 'flex flex-wrap justify-center items-start gap-4 mt-4'; // Use flexbox for layout
+
+            jsonData.sections.forEach(section => {
+                const sectionBranch = document.createElement('div');
+                sectionBranch.className = 'text-left'; // Align content left within branch
+
+                const sectionNode = document.createElement('div');
+                sectionNode.className = 'mindmap-node bg-sky-100 border-sky-300 font-semibold';
+                sectionNode.textContent = section.section_title;
+                // Add tooltip for content if no subsections
+                if (!section.subsections && section.content) {
+                     sectionNode.title = Array.isArray(section.content) ? section.content.join('\n') : section.content;
+                }
+                sectionBranch.appendChild(sectionNode);
+
+
+                if (section.subsections && section.subsections.length > 0) {
+                    const subContainer = document.createElement('div');
+                    subContainer.className = 'mindmap-children';
+                    section.subsections.forEach(sub => {
+                        const subNode = document.createElement('div');
+                        subNode.className = 'mindmap-node text-sm';
+                        subNode.textContent = sub.subsection_title;
+                        // Add tooltip for content
+                        subNode.title = Array.isArray(sub.content) ? sub.content.join('\n') : sub.content;
+                        subContainer.appendChild(subNode);
+                    });
+                    sectionBranch.appendChild(subContainer);
+                }
+                 sectionsContainer.appendChild(sectionBranch);
+            });
+
+            mapContainer.appendChild(sectionsContainer);
+            contentArea.appendChild(mapContainer);
+            // Note: This is a very simplified visual representation.
+            // True mind maps often use SVG or Canvas for lines and dynamic layout.
+        }
+
+        // 8. Content-Focused Feed
+        function renderFeed() {
+            contentArea.innerHTML = ''; // Clear previous content
+             contentArea.style.minHeight = '500px'; // Restore min-height
+            const feedContainer = document.createElement('div');
+            feedContainer.className = 'max-w-3xl mx-auto'; // Constrain width for readability
+
+            jsonData.sections.forEach(section => {
+                const sectionDiv = document.createElement('section');
+                sectionDiv.className = 'mb-10 pb-6 border-b border-gray-200 last:border-b-0';
+
+                const title = document.createElement('h2');
+                title.className = 'text-2xl md:text-3xl font-bold text-gray-800 mb-4';
+                title.textContent = section.section_title;
+                sectionDiv.appendChild(title);
+
+                if (section.subsections && section.subsections.length > 0) {
+                     section.subsections.forEach(sub => {
+                        const subContainer = document.createElement('div');
+                        subContainer.className = 'mb-5 pl-4 border-l-4 border-indigo-200'; // Indent subsections
+                        const subTitle = document.createElement('h4');
+                        subTitle.className = 'font-semibold text-xl text-gray-700 mb-2';
+                        subTitle.textContent = sub.subsection_title;
+                        subContainer.appendChild(subTitle);
+                        subContainer.appendChild(renderContent(sub.content));
+                        sectionDiv.appendChild(subContainer);
+                    });
+                } else if (section.content) {
+                    sectionDiv.appendChild(renderContent(section.content));
+                }
+                feedContainer.appendChild(sectionDiv);
+            });
+            contentArea.appendChild(feedContainer);
+        }
+
+        // 9. Horizontal Scrolling Tiles
+        function renderHorizontal() {
+            contentArea.innerHTML = ''; // Clear previous content
+             contentArea.style.minHeight = '500px'; // Restore min-height
+            const scrollContainer = document.createElement('div');
+            scrollContainer.className = 'horizontal-scroll-container bg-gray-100 p-4 rounded-lg'; // Added bg and padding
+
+            jsonData.sections.forEach(section => {
+                const tile = document.createElement('div');
+                tile.className = 'horizontal-scroll-item bg-white rounded-lg shadow-md p-4 border border-gray-200 flex flex-col h-[400px]'; // Fixed height
+
+                const title = document.createElement('h3');
+                title.className = 'text-lg font-semibold text-gray-800 mb-3 border-b pb-2';
+                title.textContent = section.section_title;
+                tile.appendChild(title);
+
+                const tileContent = document.createElement('div');
+                tileContent.className = 'overflow-y-auto flex-grow pr-2'; // Allow vertical scroll within tile
+
+                 if (section.subsections && section.subsections.length > 0) {
+                     section.subsections.forEach(sub => {
+                        const subContainer = document.createElement('div');
+                        subContainer.className = 'mb-3';
+                        const subTitle = document.createElement('h4');
+                        subTitle.className = 'font-semibold text-base text-gray-700 mb-1';
+                        subTitle.textContent = sub.subsection_title;
+                        subContainer.appendChild(subTitle);
+                        subContainer.appendChild(renderContent(sub.content));
+                        tileContent.appendChild(subContainer);
+                    });
+                } else if (section.content) {
+                    tileContent.appendChild(renderContent(section.content));
+                }
+                tile.appendChild(tileContent);
+                scrollContainer.appendChild(tile);
+            });
+            contentArea.appendChild(scrollContainer);
+        }
+
+        // 10. Dynamic Dashboard Widgets
+        function renderDashboard() {
+            contentArea.innerHTML = ''; // Clear previous content
+             contentArea.style.minHeight = '500px'; // Restore min-height
+            const dashboardContainer = document.createElement('div');
+            dashboardContainer.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+
+            jsonData.sections.forEach(section => {
+                const widget = document.createElement('div');
+                widget.className = 'bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden flex flex-col min-h-[250px]'; // Min height for widgets
+
+                const widgetHeader = document.createElement('div');
+                widgetHeader.className = 'p-3 bg-gray-50 border-b border-gray-200';
+                const title = document.createElement('h3');
+                title.className = 'text-base font-semibold text-gray-700 truncate'; // Truncate long titles
+                title.textContent = section.section_title;
+                widgetHeader.appendChild(title);
+                widget.appendChild(widgetHeader);
+
+                const widgetBody = document.createElement('div');
+                widgetBody.className = 'p-4 flex-grow overflow-y-auto'; // Scrollable content
+
+                // Display content concisely
+                 if (section.subsections && section.subsections.length > 0) {
+                     const subList = document.createElement('ul');
+                     subList.className = 'list-disc list-inside space-y-1 text-sm';
+                     section.subsections.slice(0, 4).forEach(sub => { // Show first few subsections
+                         const li = document.createElement('li');
+                         li.className = 'text-gray-600';
+                         li.textContent = sub.subsection_title;
+                         subList.appendChild(li);
+                     });
+                      if (section.subsections.length > 4) {
+                         const li = document.createElement('li');
+                         li.className = 'text-xs text-gray-500 italic';
+                         li.textContent = `+ ${section.subsections.length - 4} more...`;
+                         subList.appendChild(li);
+                     }
+                     widgetBody.appendChild(subList);
+                } else if (section.content) {
+                    const contentPreview = renderContent(section.content);
+                    contentPreview.classList.add('text-sm'); // Smaller text for widgets
+                    if(contentPreview.tagName === 'P') {
+                         contentPreview.classList.add('line-clamp-5'); // Limit paragraph lines
+                    } else if (contentPreview.tagName === 'UL') {
+                        // Limit list items if needed
+                        const items = contentPreview.querySelectorAll('li');
+                        items.forEach((item, index) => {
+                            if (index >= 4) item.classList.add('hidden'); // Hide excess items
+                        });
+                         if (items.length > 4) {
+                             const moreLi = document.createElement('li');
+                             moreLi.className = 'text-xs text-gray-500 italic mt-1';
+                             moreLi.textContent = `+ ${items.length - 4} more...`;
+                             contentPreview.appendChild(moreLi);
+                         }
+                    }
+                    widgetBody.appendChild(contentPreview);
+                }
+
+                widget.appendChild(widgetBody);
+                dashboardContainer.appendChild(widget);
+            });
+            contentArea.appendChild(dashboardContainer);
+        }
+
+
+        // --- Event Listener for Dropdown ---
+        variationSelect.addEventListener('change', (event) => {
+            const selectedValue = event.target.value;
+            // Add a fade-out effect
+            contentArea.style.opacity = 0;
+
+            // Use setTimeout to allow fade-out before rendering
+            setTimeout(() => {
+                switch (selectedValue) {
+                    case 'accordion':
+                        renderAccordion();
+                        break;
+                    case 'sidenav':
+                        renderSideNav();
+                        break;
+                    case 'parallax':
+                        renderParallax();
+                        break;
+                    case 'cards':
+                        renderCards();
+                        break;
+                     case 'tabs':
+                        renderTabs();
+                        break;
+                    case 'wizard':
+                        renderWizard(0); // Start wizard from step 0
+                        break;
+                    case 'mindmap':
+                        renderMindMap();
+                        break;
+                    case 'feed':
+                        renderFeed();
+                        break;
+                    case 'horizontal':
+                        renderHorizontal();
+                        break;
+                    case 'dashboard':
+                        renderDashboard();
+                        break;
+                    default:
+                        contentArea.innerHTML = '<p class="text-gray-500">Select a variation from the dropdown above.</p>';
+                }
+                 // Fade back in
+                contentArea.style.opacity = 1;
+            }, 200); // Match timeout roughly with transition duration
+        });
+
+        // --- Initial Render ---
+        // Optionally render the first variation by default on load
+        renderAccordion(); // Or trigger change: variationSelect.dispatchEvent(new Event('change'));
+
+    </script>
+
+</body>
+</html>
